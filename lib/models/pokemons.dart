@@ -1,6 +1,6 @@
 class PokemonModel {
 
-  PokemonModel.fromApi(Map<String, dynamic> map)
+  PokemonModel.fromJson(Map<String, dynamic> map)
       : name = map["name"],
         height = map["height"],
         weight = map["weight"],

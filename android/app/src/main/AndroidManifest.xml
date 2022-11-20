@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kalschne.diego.mobx_timer">
+    package="ru.palinochka.pokemons_app">
    <application
-        android:label="MobX Timer"
+        android:label="Pokemons App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

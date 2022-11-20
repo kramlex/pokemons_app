@@ -1,4 +1,4 @@
-package kalschne.diego.mobx_timer
+package ru.palinochka.pokemons_app
 
 import io.flutter.embedding.android.FlutterActivity
 

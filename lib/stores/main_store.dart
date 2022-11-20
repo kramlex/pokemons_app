@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 
 import '../models/pokemons_list.dart';
 import '../network/pokemon_service.dart';
+import '../prefs/local_storage.dart';
 
 part 'main_store.g.dart';
 
@@ -11,7 +12,10 @@ class MainStore = _MainStore with _$MainStore;
 
 abstract class _MainStore with Store {
 
-  // Private
+  // - Private
+
+  @observable
+  List<OnePokemonModel> _favoritesPokemons = [];
 
   @observable
   bool _isLoading = false;
@@ -34,7 +38,28 @@ abstract class _MainStore with Store {
   bool get isLoading => _isLoading;
 
   @computed
-  List<OnePokemonModel> get units => _pokemons;
+  List<OnePokemonModel> get units => _pokemons
+      .where((element) => !_favoritesPokemons._containsPokemon(element))
+      .toList();
+
+  @computed
+  List<OnePokemonModel> get favoriteUnits => _favoritesPokemons
+      .map((e) => e.like())
+      .toList();
+
+  // - Actions
+
+  @action
+  Future<void> viewIsReady() async {
+    _updateFavoritePokemons();
+    loadPokemons();
+  }
+
+  @action
+  Future<void> onFavoriteClick(OnePokemonModel model) async {
+    LocalStorage.shared.addOrRemoveFavoritePokemon(model);
+    _updateFavoritePokemons();
+  }
 
   @action
   Future<void> loadPokemons() async {
@@ -60,5 +85,29 @@ abstract class _MainStore with Store {
     _pokemons += pokemons;
 
     _isLoading = false;
+  }
+
+  // Private function
+
+  Future<void> _updateFavoritePokemons() async {
+    final favoritesPokemon = await LocalStorage.shared.loadFavoritesPokemons();
+
+    for (var pokemon in favoritesPokemon) {
+      var model = await PokemonService.shared.getPokemonDetails(url: pokemon.url);
+      pokemon.imageUrl = model.frontDefault;
+    }
+
+    _favoritesPokemons = favoritesPokemon;
+  }
+}
+
+// Extensions
+
+extension on List<OnePokemonModel> {
+  bool _containsPokemon(OnePokemonModel element) {
+    for (OnePokemonModel e in this) {
+      if (e.name == element.name) return true;
+    }
+    return false;
   }
 }

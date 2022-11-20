@@ -9,12 +9,6 @@ part of 'main_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MainStore on _MainStore, Store {
-  Computed<bool>? _$isLoadingComputed;
-
-  @override
-  bool get isLoading => (_$isLoadingComputed ??=
-          Computed<bool>(() => super.isLoading, name: '_MainStore.isLoading'))
-      .value;
   Computed<String?>? _$_nextPageUrlComputed;
 
   @override
@@ -29,6 +23,42 @@ mixin _$MainStore on _MainStore, Store {
           () => super._isLastPageLoaded,
           name: '_MainStore._isLastPageLoaded'))
       .value;
+  Computed<bool>? _$isLoadingComputed;
+
+  @override
+  bool get isLoading => (_$isLoadingComputed ??=
+          Computed<bool>(() => super.isLoading, name: '_MainStore.isLoading'))
+      .value;
+  Computed<List<OnePokemonModel>>? _$unitsComputed;
+
+  @override
+  List<OnePokemonModel> get units =>
+      (_$unitsComputed ??= Computed<List<OnePokemonModel>>(() => super.units,
+              name: '_MainStore.units'))
+          .value;
+  Computed<List<OnePokemonModel>>? _$favoriteUnitsComputed;
+
+  @override
+  List<OnePokemonModel> get favoriteUnits => (_$favoriteUnitsComputed ??=
+          Computed<List<OnePokemonModel>>(() => super.favoriteUnits,
+              name: '_MainStore.favoriteUnits'))
+      .value;
+
+  late final _$_favoritesPokemonsAtom =
+      Atom(name: '_MainStore._favoritesPokemons', context: context);
+
+  @override
+  List<OnePokemonModel> get _favoritesPokemons {
+    _$_favoritesPokemonsAtom.reportRead();
+    return super._favoritesPokemons;
+  }
+
+  @override
+  set _favoritesPokemons(List<OnePokemonModel> value) {
+    _$_favoritesPokemonsAtom.reportWrite(value, super._favoritesPokemons, () {
+      super._favoritesPokemons = value;
+    });
+  }
 
   late final _$_isLoadingAtom =
       Atom(name: '_MainStore._isLoading', context: context);
@@ -78,6 +108,22 @@ mixin _$MainStore on _MainStore, Store {
     });
   }
 
+  late final _$viewIsReadyAsyncAction =
+      AsyncAction('_MainStore.viewIsReady', context: context);
+
+  @override
+  Future<void> viewIsReady() {
+    return _$viewIsReadyAsyncAction.run(() => super.viewIsReady());
+  }
+
+  late final _$onFavoriteClickAsyncAction =
+      AsyncAction('_MainStore.onFavoriteClick', context: context);
+
+  @override
+  Future<void> onFavoriteClick(OnePokemonModel model) {
+    return _$onFavoriteClickAsyncAction.run(() => super.onFavoriteClick(model));
+  }
+
   late final _$loadPokemonsAsyncAction =
       AsyncAction('_MainStore.loadPokemons', context: context);
 
@@ -89,7 +135,9 @@ mixin _$MainStore on _MainStore, Store {
   @override
   String toString() {
     return '''
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+units: ${units},
+favoriteUnits: ${favoriteUnits}
     ''';
   }
 }

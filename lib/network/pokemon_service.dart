@@ -15,7 +15,7 @@ class PokemonService {
     final response = await _dio.get(
       "https://pokeapi.co/api/v2/pokemon"
     );
-    return PokemonList.fromApi(response.data);
+    return PokemonList.fromJson(response.data);
   }
 
   Future<PokemonList> getPokemonListFromUrl({
@@ -24,11 +24,11 @@ class PokemonService {
     final response = await _dio.get(
         nextPageUrl
     );
-    return PokemonList.fromApi(response.data);
+    return PokemonList.fromJson(response.data);
   }
 
   Future<PokemonModel> getPokemonDetails({required String url}) async {
     final response = await _dio.get(url);
-    return PokemonModel.fromApi(response.data);
+    return PokemonModel.fromJson(response.data);
   }
 }
