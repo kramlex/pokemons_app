@@ -5,13 +5,11 @@ class PokemonList {
         .map((e) => OnePokemonModel(name: e["name"], url: e["url"]))
         .toList(),
         next = map["next"],
-        prev = map["prev"],
-        count = map["count"];
+        prev = map["prev"];
 
   final List<OnePokemonModel> result;
   final String? next;
   final String? prev;
-  final int count;
 }
 
 class OnePokemonModel {

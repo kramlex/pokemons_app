@@ -23,12 +23,6 @@ mixin _$MainStore on _MainStore, Store {
           () => super._isLastPageLoaded,
           name: '_MainStore._isLastPageLoaded'))
       .value;
-  Computed<bool>? _$isLoadingComputed;
-
-  @override
-  bool get isLoading => (_$isLoadingComputed ??=
-          Computed<bool>(() => super.isLoading, name: '_MainStore.isLoading'))
-      .value;
   Computed<List<OnePokemonModel>>? _$unitsComputed;
 
   @override
@@ -57,22 +51,6 @@ mixin _$MainStore on _MainStore, Store {
   set _favoritesPokemons(List<OnePokemonModel> value) {
     _$_favoritesPokemonsAtom.reportWrite(value, super._favoritesPokemons, () {
       super._favoritesPokemons = value;
-    });
-  }
-
-  late final _$_isLoadingAtom =
-      Atom(name: '_MainStore._isLoading', context: context);
-
-  @override
-  bool get _isLoading {
-    _$_isLoadingAtom.reportRead();
-    return super._isLoading;
-  }
-
-  @override
-  set _isLoading(bool value) {
-    _$_isLoadingAtom.reportWrite(value, super._isLoading, () {
-      super._isLoading = value;
     });
   }
 
@@ -135,7 +113,6 @@ mixin _$MainStore on _MainStore, Store {
   @override
   String toString() {
     return '''
-isLoading: ${isLoading},
 units: ${units},
 favoriteUnits: ${favoriteUnits}
     ''';

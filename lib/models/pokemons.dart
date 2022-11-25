@@ -5,6 +5,7 @@ class PokemonModel {
         height = map["height"],
         weight = map["weight"],
         order = map["order"],
+        experience = map["base_experience"],
         backDefault = map["sprites"]["back_default"],
         frontDefault = map["sprites"]["front_default"],
         types = (map["types"] as List<dynamic>)
@@ -18,6 +19,7 @@ class PokemonModel {
   final int height;
   final int weight;
   final int order;
+  final int experience;
 
   final String backDefault;
   final String frontDefault;

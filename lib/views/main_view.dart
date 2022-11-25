@@ -47,7 +47,7 @@ class _MainViewState extends State<MainView>
     return Scaffold(
       appBar: AppBar(
         title: const Text(""),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green[800],
       ),
       body: Observer(
           builder: (_) => SectionGridView.builder(

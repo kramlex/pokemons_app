@@ -16,13 +16,6 @@ mixin _$DetailsStore on _DetailsStore, Store {
       (_$modelComputed ??= Computed<PokemonModel?>(() => super.model,
               name: '_DetailsStore.model'))
           .value;
-  Computed<bool>? _$isLoadingComputed;
-
-  @override
-  bool get isLoading =>
-      (_$isLoadingComputed ??= Computed<bool>(() => super.isLoading,
-              name: '_DetailsStore.isLoading'))
-          .value;
 
   late final _$_modelAtom =
       Atom(name: '_DetailsStore._model', context: context);
@@ -40,22 +33,6 @@ mixin _$DetailsStore on _DetailsStore, Store {
     });
   }
 
-  late final _$_isLoadingAtom =
-      Atom(name: '_DetailsStore._isLoading', context: context);
-
-  @override
-  bool get _isLoading {
-    _$_isLoadingAtom.reportRead();
-    return super._isLoading;
-  }
-
-  @override
-  set _isLoading(bool value) {
-    _$_isLoadingAtom.reportWrite(value, super._isLoading, () {
-      super._isLoading = value;
-    });
-  }
-
   late final _$viewIsReadyAsyncAction =
       AsyncAction('_DetailsStore.viewIsReady', context: context);
 
@@ -67,8 +44,7 @@ mixin _$DetailsStore on _DetailsStore, Store {
   @override
   String toString() {
     return '''
-model: ${model},
-isLoading: ${isLoading}
+model: ${model}
     ''';
   }
 }

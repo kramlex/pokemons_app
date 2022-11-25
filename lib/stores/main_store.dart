@@ -12,13 +12,10 @@ class MainStore = _MainStore with _$MainStore;
 
 abstract class _MainStore with Store {
 
-  // - Private
+  // Private
 
   @observable
   List<OnePokemonModel> _favoritesPokemons = [];
-
-  @observable
-  bool _isLoading = false;
 
   @observable
   List<OnePokemonModel> _pokemons = [];
@@ -35,9 +32,6 @@ abstract class _MainStore with Store {
   // Public
 
   @computed
-  bool get isLoading => _isLoading;
-
-  @computed
   List<OnePokemonModel> get units => _pokemons
       .where((element) => !_favoritesPokemons._containsPokemon(element))
       .toList();
@@ -47,7 +41,7 @@ abstract class _MainStore with Store {
       .map((e) => e.like())
       .toList();
 
-  // - Actions
+  // Actions
 
   @action
   Future<void> viewIsReady() async {
@@ -63,10 +57,8 @@ abstract class _MainStore with Store {
 
   @action
   Future<void> loadPokemons() async {
-    if (_isLoading || _isLastPageLoaded) {
-      return;
-    }
-    _isLoading = true;
+    if (_isLastPageLoaded) {}
+
 
     if (_nextPageUrl != null) {
       _lastLoadedList = await PokemonService.shared
@@ -84,7 +76,6 @@ abstract class _MainStore with Store {
 
     _pokemons += pokemons;
 
-    _isLoading = false;
   }
 
   // Private function

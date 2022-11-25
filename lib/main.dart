@@ -11,8 +11,7 @@ class PokemonApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'PokemonApp',
-      theme: ThemeData.light(),
-      home: const MainView(),
+      home: MainView(),
     );
   }
 }

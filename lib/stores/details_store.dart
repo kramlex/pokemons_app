@@ -16,21 +16,15 @@ abstract class _DetailsStore with Store {
   @observable
   PokemonModel? _model;
 
-  @observable
-  bool _isLoading = false;
 
   // Public
 
   @computed
   PokemonModel? get model => _model;
 
-  @computed
-  bool get isLoading => _isLoading;
 
   @action
   Future<void> viewIsReady(String url) async {
-    _isLoading = true;
     _model = await PokemonService.shared.getPokemonDetails(url: url);
-    _isLoading = false;
   }
 }

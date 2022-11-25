@@ -7,9 +7,7 @@ class PokemonService {
 
   static final shared = PokemonService();
 
-  final Dio _dio = Dio(
-    BaseOptions(baseUrl: "")
-  );
+  final Dio _dio = Dio();
 
   Future<PokemonList> getPokemonList() async {
     final response = await _dio.get(
