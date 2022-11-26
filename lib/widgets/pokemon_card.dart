@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../assets/icons.dart';
+import '../assets_mini/icons.dart';
 import '../models/pokemons_list.dart';
 import '../views/utils.dart';
 

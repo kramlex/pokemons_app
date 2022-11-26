@@ -1,32 +1,5 @@
-// String CreateStr(List<String> s) {
-//   String ans = '';
-//   for(String str in s) {
-//     ans += '$str, ';
-//   }
-//   return ans.substring(0, ans.length - 2);
-// }
-
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-//
-// Widget CreateAbils(List<String> s) {
-//   for (String n in s) {
-//     return Card(
-//       child: Text('$n'),
-//     );
-//   }
-// }
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-// Widget getTextWidgets(List<String> strings) {
-//   return Column(
-//       children: strings.map((item) =>
-//     Text(item),
-//       )
-//       .toList());
-// }
 
 Widget getTextWidgets(List<String> strings)
 {

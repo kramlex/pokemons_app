@@ -33,11 +33,10 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView> {
         builder: (_) => Scaffold(
             appBar: AppBar(
               iconTheme: const IconThemeData(
-                color: Colors.white, //change your color here
+                color: Colors.white,
               ),
               title: Text(
                 store.model?.name.toUpperCase() ?? "",
-                // style: TextStyle(fontWeight: FontWeight.bold ),
               ),
               foregroundColor: Colors.white,
               backgroundColor: Colors.green[800],
@@ -153,10 +152,6 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView> {
                               ],
                             ),
                           ),
-
-                          // Row(
-                          //   children: [list<String> (){return [];}]
-                          // ),
                           SizedBox(
                             height: 10,
                           ),
@@ -168,7 +163,6 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView> {
                             height: 25,
                             color: Colors.green[800],
                             child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 SizedBox(width: 10,),
                                 Text(
@@ -183,14 +177,6 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView> {
                           SizedBox(
                             height: 10,
                           ),
-                          // Row(children:
-                          //   store.model?.abilities.map((e) => Text('$e')).toList(),
-                          // ),
-                          // Row(
-                          //   children: [
-                          //       CreateAbils(store.model!.abilities),
-                          //   ],
-                          // )
                           getTextWidgets(store.model!.abilities),
                         ]),
                       ],
